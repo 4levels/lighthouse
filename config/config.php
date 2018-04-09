@@ -27,11 +27,7 @@ return [
         'models' => 'App\\Models',
         'mutations' => 'App\\Http\\GraphQL\\Mutations',
         'queries' => 'App\\Http\\GraphQL\\Queries',
-        'types' => 'App\\Http\\GraphQL\\Types',
-        'fields' => 'App\\Http\\GraphQL\\Fields',
         'scalars' => 'App\\Http\\GraphQL\\Scalars',
-        'connections' => 'App\\Http\\GraphQL\\Connections',
-        'dataloaders' => 'App\\Http\\GraphQL\\DataLoaders',
     ],
 
      /*
@@ -56,18 +52,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Relay Connections
-    |--------------------------------------------------------------------------
-    |
-    | Lighthouse provides a collection macro to assist in generating Relay connections
-    | from a collection. You can select which name you would like to assign to
-    | this maco.
-    |
-    */
-    'connection_macro' => 'toConnection',
-
-    /*
-    |--------------------------------------------------------------------------
     | Global ID
     |--------------------------------------------------------------------------
     |
@@ -88,7 +72,6 @@ return [
     |
     */
     'schema' => [
-        'output' => storage_path('lighthouse/schema.json'),
         'register' => base_path('routes/graphql/schema.graphql'),
     ],
 ];
