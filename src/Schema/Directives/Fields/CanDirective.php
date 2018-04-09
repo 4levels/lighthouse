@@ -35,15 +35,20 @@ class CanDirective implements FieldMiddleware
             'if'
         );
 
+        $model = $this->directiveArgValue(
+            $this->fieldDirective($value->getField(), 'can'),
+            'model'
+        );
+
         $resolver = $value->getResolver();
 
         return $value->setResolver(
-            function () use ($policies, $resolver) {
+            function () use ($policies, $resolver, $model) {
                 $args = func_get_args();
-                $root = $args[0];
+                $model = $model ?: get_class($args[0]);
 
-                $can = collect($policies)->reduce(function ($allowed, $policy) use ($root) {
-                    if (! auth()->user()->can($policy, get_class($root))) {
+                $can = collect($policies)->reduce(function ($allowed, $policy) use ($model) {
+                    if (! auth()->user()->can($policy, $model)) {
                         return false;
                     }
 
